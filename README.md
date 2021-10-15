@@ -12,6 +12,7 @@ Created By: VideoGameRoulette
 
 ![screenshot](https://user-images.githubusercontent.com/13387887/137440125-96b56270-95f1-4d95-9c8f-a9e27ad469bc.png)
 
+- Open D2R-IPTool.exe.
 - If you have been given an IP address for DClone hunt simply fill in the IP address into the text box and click "Fetch IP".
 - If the IP address font color is green like shown below you have matched the IP address you are searching for.
 
