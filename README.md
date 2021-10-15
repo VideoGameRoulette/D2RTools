@@ -10,8 +10,10 @@ Created By: VideoGameRoulette
 ## How to Use
 - If you have been given an IP address for DClone hunt simply fill in the IP address into the text box and click "Fetch IP".
 - If the IP address font color is green like shown below you have matched the IP address you are searching for.
+
 ![screenshot](https://cdn.discordapp.com/attachments/894715703834333225/898430586174181377/unknown.png)
 - If the IP address font color is red like below the IP address did not match the search params, or it is possibly a previously checked IP in the list.
+
 ![screenshot](https://cdn.discordapp.com/attachments/894715703834333225/898430417634463744/unknown.png)
 - If you have not given it an IP address to search for if the text returns white then you haven't checked that server to see if sojs have sold once confirmed no sojs are sold click "Checked IP" button to send current server IP to checked IP list.
 - If you find a server where soj's are walking and want to take note of IP for secondary accounts click the Copy IP button to copy the IP to clipboard then paste in the textbox to help search for IP on other accounts.
