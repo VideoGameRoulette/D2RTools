@@ -20,17 +20,20 @@ Created By: VideoGameRoulette
 
 ## Frequesntly Asked Questions
 
-### I accidently added an IP before an SOJ was sold how do I remove it?
+### Q: I accidently added an IP before an SOJ was sold how do I remove it?
 - Click on the IP in the list, then click the "Remove Seleceted IP" button, followed by a prompt to make sure you want to delete it from list, click "Ok" and it should remove it from the list of checked IP addresses.
 
-### How do I reset my list for new DClone hunt?
+### Q: How do I reset my list for new DClone hunt?
 - Click the "Clear All" button followed by a prompt to make sure you want to clear the entire list, click "Ok" and it should clear all entries from the list.
 
-### Do I need to supply an IP address to use this tool?
+### Q: Do I need to supply an IP address to use this tool?
 - No you can hunt with or without an IP address provided, it just makes things easier to keep track of without an IP supplied so you can keep track of IP's you've checked already.
 
-### Why do I need to download TCPView? Can't you do what it's doing as well.
+### Q: Why do I need to download TCPView? Can't you do what it's doing as well.
 - Currently researching how to effectively replicate what TCPView is doing to remove the need for it, but for now this is the safest way to obtain the IP address without triggering any anti cheat flags connecting to the games process directly to fetch info.
 
-### Can I get banned using this tool?
+### Q: Can I get banned using this tool?
 - Like any third party tools, Blizzard / Battle.net holds the right to ban anyone using third party tools to gain any sort of advantage in the game with that said, if they won't ban users that use TCPView to track down DClone servers this shouldn't be any less safer then just using that since it uses TCPView to get the IP it just makes the data given back from TCPView easier to read since we only care about the specific IP we joined we just have it relay that info from TCPView to the app so no connection is being made to the game directly at all. If you are getting banned its for using TCPView not my software.
+
+### Q: Where do I download TCPView?
+- [TCPView Download Link](https://download.sysinternals.com/files/TCPView.zip)
