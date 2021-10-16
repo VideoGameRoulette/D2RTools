@@ -7,6 +7,8 @@ TCP Server IP Fetcher Tool for D2R
 
 Created By: VideoGameRoulette
 
+Credits: Squirrelies (PInvoke and DEVMODE), michel-pi (GameOverlay.net), and SharpDX Team
+
 ## How to Use
 - Download TCPView (Download link provided below) and D2R-IPTool then extract tcpvcon64.exe into same folder as D2R-IPTool.exe.
 
