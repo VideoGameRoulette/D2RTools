@@ -7,21 +7,31 @@ TCP Server IP Fetcher Tool for D2R
 
 Created By: VideoGameRoulette
 
-## How to Use
-- Download TCPView (Download link provided below) and D2R-IPTool then extract tcpvcon64.exe into same folder as D2R-IPTool.exe.
+Credits: Squirrelies (PInvoke and DEVMODE), michel-pi (GameOverlay.net), and SharpDX Team
 
-![screenshot](https://user-images.githubusercontent.com/13387887/137440125-96b56270-95f1-4d95-9c8f-a9e27ad469bc.png)
+## How to Use
+- Extract all contents of zip file to any folder like shown below.
+
+![installfolder](https://cdn.discordapp.com/attachments/551840398016774193/899313251689586698/unknown.png)
 
 - Open D2R-IPTool.exe.
-- If you have been given an IP address for DClone hunt simply fill in the IP address into the text box and click "Fetch IP".
+- If you have been given an IP address for DClone hunt simply fill in the IP address into the text box and click "Fetch IP" or check the Enable Auto Fetch.
 - If the IP address font color is green like shown below you have matched the IP address you are searching for.
 
-![screenshot](https://cdn.discordapp.com/attachments/894715703834333225/898430586174181377/unknown.png)
+![inappgoodip](https://cdn.discordapp.com/attachments/551840398016774193/899318973663961158/unknown.png)
+![ingamegoodip](https://cdn.discordapp.com/attachments/896955170062209084/899286282457481256/unknown.png)
 - If the IP address font color is red like below the IP address did not match the search params, or it is possibly a previously checked IP in the list.
 
-![screenshot](https://cdn.discordapp.com/attachments/894715703834333225/898430417634463744/unknown.png)
-- If you have not given it an IP address to search for if the text returns white then you haven't checked that server to see if sojs have sold once confirmed no sojs are sold click "Checked IP" button to send current server IP to checked IP list.
+![inappbadip](https://cdn.discordapp.com/attachments/551840398016774193/899318884786659398/unknown.png)
+![ingamebadip](https://cdn.discordapp.com/attachments/551840398016774193/899319136000282645/unknown.png)
+- If you have not given it an IP address to search for if the text returns white (gold ingame) then you haven't checked that server to see if sojs have sold once confirmed no sojs are sold click "Checked IP" button to send current server IP to checked IP list.
+
+![inappunknownip](https://cdn.discordapp.com/attachments/551840398016774193/899319631767027733/unknown.png)
+![ingameunknownip](https://cdn.discordapp.com/attachments/551840398016774193/899319742295322634/unknown.png)
 - If you find a server where soj's are walking and want to take note of IP for secondary accounts click the Copy IP button to copy the IP to clipboard then paste in the textbox to help search for IP on other accounts.
+- To enable in-game overlay UI, simply check the Enable DX Overlay checkbox to have both IP and Timer shown above game window.
+
+![inappoptions](https://cdn.discordapp.com/attachments/551840398016774193/899320100841213962/unknown.png)
 
 ## Frequesntly Asked Questions
 
