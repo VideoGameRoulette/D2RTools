@@ -189,10 +189,11 @@ namespace DRIPTool
 
                     foreach (string line in lines)
                     {
-                        if (line.Contains("ESTABLISHED") && !line.Contains("127.0.0.1") && !line.Contains("24.105.29.76") && !line.Contains("137.221."))
+                        if (line.Contains("ESTABLISHED") && !line.Contains("127.0.0.1") && !line.Contains("24.105.29.76") && !line.Contains("137.221.") && !line.Contains("34.117.122.6"))
                         {
                             IPList.Add(line);
                         }
+                        //D2R.exe,21716,TCP,Close Wait,192.168.2.219,57052,34.117.122.6,443,2021 - 10 - 17 3:12:55 PM,D2R.exe,,,,
                     }
 
                     if (IPList.Count > 0)
