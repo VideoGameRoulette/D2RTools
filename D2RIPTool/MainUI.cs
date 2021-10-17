@@ -124,6 +124,7 @@ namespace DRIPTool
             }
             catch (Exception ex)
             {
+                checkBox2.Checked = false;
                 MessageBox.Show(ex.ToString());
             }
             finally
@@ -137,9 +138,10 @@ namespace DRIPTool
         private void DrawOverlay()
         {
             float xOffset = 25;
-            float yOffset = 15;
+            float yOffset = 1000;
 
-            DrawTextBlock(ref xOffset, ref yOffset, "IP: ", CurrentIP.Text, _currentBrush);
+            string[] args = CurrentIP.Text.Split('.');
+            DrawTextBlock(ref xOffset, ref yOffset, "IP: ", args.Last(), _currentBrush);
             DrawTextBlock(ref xOffset, ref yOffset, "Time: ", CountdownLabel.Text, _gold);
         }
 
@@ -262,7 +264,7 @@ namespace DRIPTool
         private void RemoveIP_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show("Are you sure you want to remove this ip from the list?", "Warning", MessageBoxButtons.OKCancel);
-            if (result == DialogResult.OK)
+            if (result == DialogResult.OK && CheckedIPList.SelectedIndex != -1)
             {
                 CheckedIPList.Items.RemoveAt(CheckedIPList.SelectedIndex);
                 SetTextColor();
