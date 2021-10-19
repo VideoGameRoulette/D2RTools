@@ -1,0 +1,357 @@
+﻿<Window
+    x:Class="D2RTools.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:D2RTools"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="800"
+    Height="450"
+    Background="Transparent"
+    mc:Ignorable="d">
+    <Border Background="#272537">
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Image
+                    Width="40"
+                    Height="40"
+                    Margin="5"
+                    Source="/d2r.ico" />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Text="VGR's D2R Tools" />
+            </StackPanel>
+
+            <StackPanel
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox
+                        x:Name="checkBox2"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Checked="checkBox2_Checked"
+                        Content="Enable Auto Fetch"
+                        Foreground="White" />
+
+                    <CheckBox
+                        x:Name="checkBox1"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Checked="checkBox1_Checked"
+                        Content="Enable DirectX Overlay"
+                        Foreground="White" />
+                </Grid>
+            </StackPanel>
+
+            <Border
+                Grid.Row="1"
+                Margin="5,5,5,5"
+                Background="#181729"
+                CornerRadius="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            Width="190"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="DX Overlay Settings"
+                            TextAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="0,0,5,0"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="X:" />
+                        <TextBox
+                            x:Name="CustomX"
+                            Width="100"
+                            Height="20"
+                            Text="25" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="2"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="0,0,5,0"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="Y:" />
+                        <TextBox
+                            x:Name="CustomY"
+                            Width="100"
+                            Height="20"
+                            Text="100" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="3"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="0,0,5,0"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="Font Family:" />
+                        <TextBox
+                            x:Name="CustomFontFamily"
+                            Width="100"
+                            Height="20"
+                            Text="Consolas" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="4"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="0,0,5,0"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="Font Size:" />
+                        <TextBox
+                            x:Name="CustomFontSize"
+                            Width="100"
+                            Height="20"
+                            Text="15" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="5"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="0,0,5,0"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="UI Scale:" />
+                        <TextBox
+                            x:Name="CustomScale"
+                            Width="100"
+                            Height="20"
+                            Text="1" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="6"
+                        Margin="0,0,15,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="0,0,5,0"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="Cooldown:" />
+                        <TextBox
+                            x:Name="CustomCooldown"
+                            Width="100"
+                            Height="20"
+                            Text="30" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Orientation="Horizontal">
+                        <TextBlock
+                            Width="190"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="Last Game Creation Timer"
+                            TextAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="8" Orientation="Horizontal">
+                        <TextBlock
+                            x:Name="CountdownLabel"
+                            Width="190"
+                            VerticalAlignment="Center"
+                            FontSize="50"
+                            Foreground="White"
+                            Text="30"
+                            TextAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="9" Orientation="Horizontal">
+                        <Button
+                            Width="180"
+                            Margin="5"
+                            Background="#272537"
+                            Click="RestartTimer_Click"
+                            Content="Restart Timer"
+                            Foreground="White" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="5,5,5,5"
+                Background="#181729"
+                CornerRadius="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox
+                        x:Name="SearchBar"
+                        Grid.ColumnSpan="4"
+                        Margin="5"
+                        Background="#272537"
+                        Foreground="White"
+                        Text="0.0.0.0" />
+
+                    <Button
+                        x:Name="FetchIP"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="1"
+                        Margin="5"
+                        Background="#272537"
+                        Click="FetchIP_Click"
+                        Content="Fetch IP"
+                        Foreground="White" />
+
+                    <Button
+                        x:Name="button2"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="5"
+                        Background="#272537"
+                        Click="CheckedIP_Click"
+                        Content="Add IP To Checklist"
+                        Foreground="White" />
+
+                    <Button
+                        x:Name="button1"
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        Margin="5"
+                        Background="#272537"
+                        Click="CopyIP_Click"
+                        Content="Copy IP"
+                        Foreground="White" />
+
+                    <StackPanel
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="Servers Checked: " />
+                        <TextBlock
+                            x:Name="ServersCheckedLabel"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="0" />
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="Current IP: " />
+                        <TextBlock
+                            x:Name="CurrentIP"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="0.0.0.0" />
+                    </StackPanel>
+
+                    <ListBox
+                        x:Name="CheckedIPList"
+                        Grid.Row="3"
+                        Grid.ColumnSpan="4"
+                        Margin="10,10,10,5"
+                        Background="White" />
+
+                    <Button
+                        Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        Margin="5"
+                        Background="#272537"
+                        Click="RemoveIP_Click"
+                        Content="Remove Selected IP"
+                        Foreground="White" />
+
+                    <Button
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2"
+                        Margin="5"
+                        Background="#272537"
+                        Click="ClearAll_Click"
+                        Content="Clear All"
+                        Foreground="White" />
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>
