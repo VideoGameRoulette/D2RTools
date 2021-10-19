@@ -11,7 +11,7 @@ jobs:
     runs-on: "windows-latest"
     env:
       working-directory: .
-      project-name: D2R-IPTool
+      project-name: D2RTools
       publish-profile-name: x64
       is-prerelease: true
 
