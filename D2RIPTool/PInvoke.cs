@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace DRIPTool
+namespace D2RIPTool
 {
     public static class PInvoke
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DRIPTool.Properties {
+namespace D2RIPTool.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

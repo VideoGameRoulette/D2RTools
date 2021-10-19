@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{67DBB230-C911-46FA-AD31-B21766F4D005}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DRIPTool</RootNamespace>
-    <AssemblyName>DRIPTool</AssemblyName>
+    <RootNamespace>D2RIPTool</RootNamespace>
+    <AssemblyName>D2RIPTool</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -100,7 +100,6 @@
       <DependentUpon>MainUI.cs</DependentUpon>
     </Compile>
     <Compile Include="PInvoke.cs" />
-    <Compile Include="PluginConfiguration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainUI.resx">

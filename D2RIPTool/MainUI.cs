@@ -10,7 +10,7 @@ using GameOverlay.Drawing;
 using GameOverlay.Windows;
 using SharpDX.Direct2D1;
 
-namespace DRIPTool
+namespace D2RIPTool
 {
     public partial class MainUI : Form
     {
@@ -22,8 +22,7 @@ namespace DRIPTool
         private Process gameProcess;
         private IntPtr gameWindowHandle;
 
-        public int defaultTime = 30;
-        public int currentTime = 30;
+        public int currentTime;
 
         private Font _consolasBold;
 
@@ -33,6 +32,18 @@ namespace DRIPTool
         private SolidBrush _gold;
 
         private SolidBrush _currentBrush;
+
+        private string[] FilteredIP = {
+            "24.105.29.76", // GLOBAL??
+            "34.117.122.6", // GLOBAL??
+            "37.244.28.80", // US
+            "37.244.54.10", // US
+            "117.52.35.45", // ASIA
+            "117.52.35.179", // ASIA
+            "127.0.0.1", // LOCAL
+            "137.221.105.152", // EU
+            "137.221.106.188" // EU
+        };
 
         public MainUI()
         {
@@ -72,7 +83,7 @@ namespace DRIPTool
             // Get a refernence to the underlying RenderTarget from SharpDX. This'll be used to draw portions of images.
             _device = (SharpDX.Direct2D1.WindowRenderTarget)typeof(Graphics).GetField("_device", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(_graphics);
 
-            _consolasBold = _graphics?.CreateFont("Diablo", 14, true);
+            _consolasBold = _graphics?.CreateFont(CustomFontFamily.Text, Int32.Parse(CustomFontSize.Text), true);
 
             _white = _graphics?.CreateSolidBrush(255, 255, 255);
             _red = _graphics?.CreateSolidBrush(255, 0, 0);
@@ -117,9 +128,7 @@ namespace DRIPTool
             {
                 _graphics?.BeginScene();
                 _graphics?.ClearScene();
-
-                _device.Transform = new SharpDX.Mathematics.Interop.RawMatrix3x2(1f, 0f, 0f, 1f, 0f, 0f);
-
+                _device.Transform = new SharpDX.Mathematics.Interop.RawMatrix3x2(Int32.Parse(CustomScale.Text), 0f, 0f, Int32.Parse(CustomScale.Text), 0f, 0f);
                 DrawOverlay();
             }
             catch (Exception ex)
@@ -137,8 +146,8 @@ namespace DRIPTool
 
         private void DrawOverlay()
         {
-            float xOffset = 25;
-            float yOffset = 1000;
+            float xOffset = Int32.Parse(CustomX.Text);
+            float yOffset = Int32.Parse(CustomY.Text);
 
             string[] args = CurrentIP.Text.Split('.');
             DrawTextBlock(ref xOffset, ref yOffset, "IP: ", args.Last(), _currentBrush);
@@ -189,11 +198,21 @@ namespace DRIPTool
 
                     foreach (string line in lines)
                     {
-                        if (line.Contains("ESTABLISHED") && !line.Contains("127.0.0.1") && !line.Contains("24.105.29.76") && !line.Contains("137.221.") && !line.Contains("34.117.122.6"))
+                        if (line.Contains("ESTABLISHED"))
                         {
-                            IPList.Add(line);
+                            if (!line.Contains(FilteredIP[0]) && 
+                                !line.Contains(FilteredIP[1]) && 
+                                !line.Contains(FilteredIP[2]) &&
+                                !line.Contains(FilteredIP[3]) &&
+                                !line.Contains(FilteredIP[4]) &&
+                                !line.Contains(FilteredIP[5]) &&
+                                !line.Contains(FilteredIP[6]) &&
+                                !line.Contains(FilteredIP[7]) &&
+                                !line.Contains(FilteredIP[8]))
+                            {
+                                IPList.Add(line);
+                            }
                         }
-                        //D2R.exe,21716,TCP,Close Wait,192.168.2.219,57052,34.117.122.6,443,2021 - 10 - 17 3:12:55 PM,D2R.exe,,,,
                     }
 
                     if (IPList.Count > 0)
@@ -205,7 +224,11 @@ namespace DRIPTool
                             StartTimer();
                         }
                         SetTextColor();
-                    }  
+                    }
+                    else if (IPList.Count == 0)
+                    {
+                        CurrentIP.Text = "0.0.0.0";
+                    }
                 }
             }
             catch (Exception ex)
@@ -279,7 +302,7 @@ namespace DRIPTool
 
         private void StartTimer()
         {
-            currentTime = 30;
+            currentTime = Int32.Parse(CustomCooldown.Text);
             SetTime(currentTime);
             countdownTimer.Start();
         }
@@ -308,7 +331,7 @@ namespace DRIPTool
             ServersCheckedLabel.Text = string.Format("Servers Checked: {0}", i);
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void autoFetch_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked) refreshTimer.Start();
             else refreshTimer.Stop();
@@ -319,7 +342,7 @@ namespace DRIPTool
             GetServerDetails();
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        private void dxOverlay_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
             {
@@ -336,6 +359,11 @@ namespace DRIPTool
         private void overlayUpdate_Tick(object sender, EventArgs e)
         {
             ReceiveData();
+        }
+
+        private void RestartTimer_Click(object sender, EventArgs e)
+        {
+            StartTimer();
         }
     }
 }
