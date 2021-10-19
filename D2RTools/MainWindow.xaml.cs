@@ -27,8 +27,16 @@ namespace D2RTools
         {
             InitializeComponent();
             countdownTimer = new DispatcherTimer();
+            countdownTimer.Interval = TimeSpan.FromSeconds(1);
+            countdownTimer.Tick += countdownTimer_Tick;
+
             refreshTimer = new DispatcherTimer();
+            refreshTimer.Interval = TimeSpan.FromSeconds(1);
+            refreshTimer.Tick += refreshTimer_Tick;
+
             overlayUpdate = new DispatcherTimer();
+            overlayUpdate.Interval = TimeSpan.FromSeconds(1);
+            overlayUpdate.Tick += overlayUpdate_Tick;
         }
 
         private OverlayWindow _window;
@@ -350,13 +358,13 @@ namespace D2RTools
 
         private void checkBox2_Checked(object sender, RoutedEventArgs e)
         {
-            if (checkBox1.IsChecked == true) refreshTimer.Start();
+            if (checkBox2.IsChecked == true) refreshTimer.Start();
             else refreshTimer.Stop();
         }
 
         private void checkBox1_Checked(object sender, RoutedEventArgs e)
         {
-            if (checkBox2.IsChecked == true)
+            if (checkBox1.IsChecked == true)
             {
                 Startup();
                 overlayUpdate.Start();
