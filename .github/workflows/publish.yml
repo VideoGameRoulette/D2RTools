@@ -29,7 +29,7 @@ jobs:
         echo '::set-output name=program-exe::${{env.project-name}}.exe'
         echo '::set-output name=solution::${{env.project-name}}.sln'
         echo '::set-output name=project::${{env.project-name}}/${{env.project-name}}.csproj'
-        echo '::set-output name=publish-directory::/bin/Release/net5.0-windows/publish/'
+        echo '::set-output name=publish-directory::${{env.project-name}}/bin/Release/net5.0-windows/publish/'
 
     # Get the project's version number
     - name: Get project version
