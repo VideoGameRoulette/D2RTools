@@ -50,7 +50,8 @@
                         VerticalAlignment="Center"
                         Checked="checkBox2_Checked"
                         Content="Enable Auto Fetch"
-                        Foreground="White" />
+                        Foreground="White"
+                        Unchecked="checkBox2_Checked" />
 
                     <CheckBox
                         x:Name="checkBox1"
@@ -58,7 +59,8 @@
                         VerticalAlignment="Center"
                         Checked="checkBox1_Checked"
                         Content="Enable DirectX Overlay"
-                        Foreground="White" />
+                        Foreground="White"
+                        Unchecked="checkBox1_Checked" />
                 </Grid>
             </StackPanel>
 
