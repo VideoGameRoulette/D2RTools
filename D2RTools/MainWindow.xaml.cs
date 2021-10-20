@@ -103,7 +103,7 @@ namespace D2RTools
             // Get a refernence to the underlying RenderTarget from SharpDX. This'll be used to draw portions of images.
             _device = (WindowRenderTarget)typeof(Graphics).GetField("_device", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(_graphics);
 
-            _consolasBold = _graphics?.CreateFont(CustomFontFamily.Text, Int32.Parse(CustomFontSize.Text), true);
+            _consolasBold = _graphics?.CreateFont(CustomFontFamily.Text, ConvertStringToInt(CustomFontSize.Text), true);
 
             _white = _graphics?.CreateSolidBrush(255, 255, 255);
             _red = _graphics?.CreateSolidBrush(255, 0, 0);
@@ -148,7 +148,7 @@ namespace D2RTools
             {
                 _graphics?.BeginScene();
                 _graphics?.ClearScene();
-                _device.Transform = new SharpDX.Mathematics.Interop.RawMatrix3x2(Int32.Parse(CustomScale.Text), 0f, 0f, Int32.Parse(CustomScale.Text), 0f, 0f);
+                _device.Transform = new SharpDX.Mathematics.Interop.RawMatrix3x2(ConvertStringToInt(CustomScale.Text), 0f, 0f, ConvertStringToInt(CustomScale.Text), 0f, 0f);
                 DrawOverlay();
             }
             catch (Exception ex)
@@ -166,8 +166,8 @@ namespace D2RTools
 
         private void DrawOverlay()
         {
-            float xOffset = Int32.Parse(CustomX.Text);
-            float yOffset = Int32.Parse(CustomY.Text);
+            float xOffset = ConvertStringToInt(CustomX.Text);
+            float yOffset = ConvertStringToInt(CustomY.Text);
 
             string[] args = CurrentIP.Text.Split('.');
             DrawTextBlock(ref xOffset, ref yOffset, "IP: ", args.Last(), _currentBrush);
@@ -312,7 +312,7 @@ namespace D2RTools
 
         private void StartTimer()
         {
-            currentTime = Int32.Parse(CustomCooldown.Text);
+            currentTime = ConvertStringToInt(CustomCooldown.Text);
             SetTime(currentTime);
             countdownTimer.Start();
         }
@@ -374,6 +374,14 @@ namespace D2RTools
                 Shutdown();
                 overlayUpdate.Stop();
             }
+        }
+
+        private int ConvertStringToInt(string s)
+        {
+            int i = 0;
+            var result = int.TryParse(s, out i);
+            if (result) return i;
+            return 0;
         }
     }
 }
