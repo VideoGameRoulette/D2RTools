@@ -61,13 +61,12 @@ namespace D2RTools
         private string[] FilteredIP = {
             "24.105.29.76", // GLOBAL??
             "34.117.122.6", // GLOBAL??
-            "37.244.28.80", // US
-            "37.244.54.10", // US
-            "117.52.35.45", // ASIA
-            "117.52.35.179", // ASIA
+            "37.244.28.", // US
+            "37.244.54.", // US
+            "117.52.35.", // ASIA
             "127.0.0.1", // LOCAL
-            "137.221.105.152", // EU
-            "137.221.106.188" // EU
+            "137.221.105.", // EU
+            "137.221.106." // EU
         };
 
         [STAThread]
@@ -237,8 +236,7 @@ namespace D2RTools
                                 !line.Contains(FilteredIP[4]) &&
                                 !line.Contains(FilteredIP[5]) &&
                                 !line.Contains(FilteredIP[6]) &&
-                                !line.Contains(FilteredIP[7]) &&
-                                !line.Contains(FilteredIP[8]))
+                                !line.Contains(FilteredIP[7]))
                             {
                                 IPList.Add(line);
                             }
