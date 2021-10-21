@@ -141,6 +141,11 @@ namespace D2RTools
 
         public int ReceiveData()
         {
+            if (gameProcess.HasExited)
+            {
+                checkBox1.IsChecked = false;
+                return 0;
+            }
             _window?.PlaceAbove(gameWindowHandle);
             _window?.FitTo(gameWindowHandle, true);
 
@@ -197,6 +202,11 @@ namespace D2RTools
                     ProcessStartInfo ps = new ProcessStartInfo();
                     ps.Arguments = "-c -n d2r";
                     ps.FileName = "tcpvcon64.exe";
+                    if (!File.Exists(ps.FileName))
+                    {
+                        checkBox2.IsChecked = false;
+                        return;
+                    }
                     ps.UseShellExecute = false;
                     ps.CreateNoWindow = true;
                     ps.WindowStyle = ProcessWindowStyle.Hidden;
