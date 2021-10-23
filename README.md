@@ -19,7 +19,7 @@ Credits: Squirrelies (PInvoke and DEVMODE), michel-pi (GameOverlay.net), and Sha
 
 ![D2RTools Install Example](https://cdn.discordapp.com/attachments/551840398016774193/900437658453557248/unknown.png)
 ## How to Use
-- Open D2R-IPTool.exe.
+- Open D2RTools.exe.
 - If you have been given an IP address for DClone hunt simply fill in the IP address into the text box and click "Fetch IP" or check the Enable Auto Fetch.
 - If the IP address font color is green like shown below you have matched the IP address you are searching for.
 
