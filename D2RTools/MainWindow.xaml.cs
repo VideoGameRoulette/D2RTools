@@ -186,9 +186,9 @@ namespace D2RTools
 
         private void DrawTextBlock(ref float dx, ref float dy, string label, string val, SolidBrush color)
         {
-            _graphics?.DrawText(_consolasBold, 20f, _gold, 0 + 15f, dy += 24, label);
-            dx = 0 + 15f + GetStringSize(label) + 10f;
-            _graphics?.DrawText(_consolasBold, 20f, color, dx, dy, val); //110f
+            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24, label);
+            var dx2 = dx + GetStringSize(label) + 10f;
+            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), color, dx2, dy, val); //110f
         }
 
         public void GetServerDetails()
@@ -390,6 +390,14 @@ namespace D2RTools
             var result = int.TryParse(s, out i);
             if (result) return i;
             return 0;
+        }
+
+        private float ConvertStringToFloat(string s)
+        {
+            float i = 0;
+            var result = float.TryParse(s, out i);
+            if (result) return i;
+            return 0f;
         }
     }
 }

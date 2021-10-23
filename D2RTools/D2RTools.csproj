@@ -9,8 +9,8 @@
     <Copyright>Copyright © 2021 VideoGameRoulette</Copyright>
     <Product>D2R Tools</Product>
     <Description>A plugin tool for Diablo 2 Resurrected</Description>
-    <Version>1.0.0.5</Version>
-    <FileVersion>1.0.0.5</FileVersion>
+    <Version>1.0.0.8</Version>
+    <FileVersion>1.0.0.8</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <DebugType>embedded</DebugType>
     <ApplicationIcon>d2r.ico</ApplicationIcon>
