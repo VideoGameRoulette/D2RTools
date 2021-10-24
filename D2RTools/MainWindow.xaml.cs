@@ -225,6 +225,8 @@ namespace D2RTools
 
                     List<string> IPList = new List<string>();
 
+                    if (gameProcess == default) gameProcess = GetProcess();
+
                     foreach (string line in lines)
                     {
                         if (line.Contains("ESTABLISHED"))
