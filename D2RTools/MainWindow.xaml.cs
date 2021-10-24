@@ -236,7 +236,8 @@ namespace D2RTools
                                 !line.Contains(FilteredIP[4]) &&
                                 !line.Contains(FilteredIP[5]) &&
                                 !line.Contains(FilteredIP[6]) &&
-                                !line.Contains(FilteredIP[7]))
+                                !line.Contains(FilteredIP[7]) &&
+                                line.Contains(gameProcess.Id.ToString()))
                             {
                                 IPList.Add(line);
                             }
