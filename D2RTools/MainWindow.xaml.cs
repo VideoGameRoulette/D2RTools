@@ -270,21 +270,48 @@ namespace D2RTools
 
         private void SetTextColor()
         {
-            if (SearchBar.Text != string.Empty && SearchBar.Text != "0.0.0.0" && SearchBar.Text == CurrentIP.Text)
+            string[] args = SearchBar.Text.Split(',');
+            if (args.Length > 1)
             {
-                CurrentIP.Foreground = Brushes.Green;
-                _currentBrush = _green;
-            }
-            else if (CheckedIPList.Items.Contains(CurrentIP.Text) || SearchBar.Text != string.Empty && SearchBar.Text != "0.0.0.0" && SearchBar.Text != CurrentIP.Text)
-            {
-                CurrentIP.Foreground = Brushes.Red;
-                _currentBrush = _red;
+                for (var i = 0; i == args.Length; i++)
+                {
+                    if (i == args.Length)
+                    {
+                        CurrentIP.Foreground = Brushes.Red;
+                        _currentBrush = _red;
+                        return;
+                    }
+                    if (args[i] == CurrentIP.Text)
+                    {
+                        CurrentIP.Foreground = Brushes.Green;
+                        _currentBrush = _green;
+                        return;
+                    }
+                }
+
             }
             else
             {
-                CurrentIP.Foreground = Brushes.White;
-                _currentBrush = _gold;
+                if (SearchBar.Text != string.Empty && SearchBar.Text != "0.0.0.0" && SearchBar.Text == CurrentIP.Text)
+                {
+                    CurrentIP.Foreground = Brushes.Green;
+                    _currentBrush = _green;
+                    return;
+                }
+                else if (CheckedIPList.Items.Contains(CurrentIP.Text) || SearchBar.Text != string.Empty && SearchBar.Text != "0.0.0.0" && SearchBar.Text != CurrentIP.Text)
+                {
+                    CurrentIP.Foreground = Brushes.Red;
+                    _currentBrush = _red;
+                    return;
+                }
+                else
+                {
+                    CurrentIP.Foreground = Brushes.White;
+                    _currentBrush = _gold;
+                    return;
+                }
             }
+            
         }
 
         private void FetchIP_Click(object sender, EventArgs e)
