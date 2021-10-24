@@ -43,7 +43,7 @@ namespace D2RTools
         private Graphics _graphics;
         private WindowRenderTarget _device;
 
-        private Process GetProcess() => Process.GetProcessesByName("d2r")?.FirstOrDefault();
+        private Process GetProcess() => ProcessBar.Text != "d2r" ? Process.GetProcessesByName(ProcessBar.Text)?.FirstOrDefault() : Process.GetProcessesByName("d2r")?.FirstOrDefault();
         private Process gameProcess;
         private IntPtr gameWindowHandle;
 
@@ -187,7 +187,7 @@ namespace D2RTools
         private void DrawTextBlock(ref float dx, ref float dy, string label, string val, SolidBrush color)
         {
             _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24, label);
-            var dx2 = dx + GetStringSize(label) + 10f;
+            var dx2 = dx + GetStringSize(label) + 5f;
             _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), color, dx2, dy, val); //110f
         }
 
@@ -398,6 +398,12 @@ namespace D2RTools
             var result = float.TryParse(s, out i);
             if (result) return i;
             return 0f;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow n = new MainWindow();
+            n.Show();
         }
     }
 }
