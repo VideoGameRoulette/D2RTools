@@ -43,7 +43,7 @@ namespace D2RTools
         private Graphics _graphics;
         private WindowRenderTarget _device;
 
-        private Process GetProcess() => ProcessBar.Text != "d2r" ? Process.GetProcessesByName(ProcessBar.Text)?.FirstOrDefault() : Process.GetProcessesByName("d2r")?.FirstOrDefault();
+        private Process GetProcess() => ProcessBar.Text != "0" ? Process.GetProcessesByName("d2r")?[ConvertStringToInt(ProcessBar.Text)] : Process.GetProcessesByName("d2r")?.FirstOrDefault();
         private Process gameProcess;
         private IntPtr gameWindowHandle;
 
@@ -400,10 +400,23 @@ namespace D2RTools
             return 0f;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ProcessBar_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            MainWindow n = new MainWindow();
-            n.Show();
+            Regex r = new Regex("[^0-9]+");
+            e.Handled = r.IsMatch(e.Text);
+        }
+
+        private void ProcessBar_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            string s = ProcessBar.Text;
+            string s2 = s.TrimStart('0');
+            int i = ConvertStringToInt(s2);
+            Process[] p = Process.GetProcessesByName("d2r");
+            int l = p.Length - 1;
+            if (i > p.Length)
+            {
+                ProcessBar.Text = l == -1 ? "0" : l.ToString();
+            }
         }
     }
 }
