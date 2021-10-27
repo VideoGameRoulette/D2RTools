@@ -42,25 +42,36 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
 
                     <CheckBox
-                        x:Name="checkBox2"
+                        x:Name="showIP"
                         Margin="0,0,10,0"
                         VerticalAlignment="Center"
-                        Checked="checkBox2_Checked"
+                        Checked="autoFetch_Checked"
+                        Content="Show IP"
+                        Foreground="White"
+                        Unchecked="autoFetch_Checked" />
+
+                    <CheckBox
+                        x:Name="checkBox2"
+                        Grid.Column="1"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Checked="autoFetch_Checked"
                         Content="Enable Auto Fetch"
                         Foreground="White"
-                        Unchecked="checkBox2_Checked" />
+                        Unchecked="autoFetch_Checked" />
 
                     <CheckBox
                         x:Name="checkBox1"
-                        Grid.Column="1"
+                        Grid.Column="2"
                         VerticalAlignment="Center"
-                        Checked="checkBox1_Checked"
+                        Checked="overlay_Checked"
                         Content="Enable DirectX Overlay"
                         Foreground="White"
-                        Unchecked="checkBox1_Checked" />
+                        Unchecked="overlay_Checked" />
                 </Grid>
             </StackPanel>
 
@@ -251,18 +262,8 @@
                     </Grid.RowDefinitions>
 
                     <TextBox
-                        x:Name="ProcessBar"
-                        Grid.ColumnSpan="2"
-                        Margin="5"
-                        Background="#272537"
-                        Foreground="White"
-                        Text="0"
-                        PreviewTextInput="ProcessBar_PreviewTextInput" InputScope="Number" TextChanged="ProcessBar_TextChanged"/>
-
-                    <TextBox
                         x:Name="SearchBar"
-                        Grid.Column="2"
-                        Grid.ColumnSpan="2"
+                        Grid.ColumnSpan="4"
                         Margin="5"
                         Background="#272537"
                         Foreground="White"

@@ -43,7 +43,7 @@ namespace D2RTools
         private Graphics _graphics;
         private WindowRenderTarget _device;
 
-        private Process GetProcess() => ProcessBar.Text != "0" ? Process.GetProcessesByName("d2r")?[ConvertStringToInt(ProcessBar.Text)] : Process.GetProcessesByName("d2r")?.FirstOrDefault();
+        private Process GetProcess() => Process.GetProcessesByName("d2r")?.FirstOrDefault();
         private Process gameProcess;
         private IntPtr gameWindowHandle;
 
@@ -57,6 +57,8 @@ namespace D2RTools
         private SolidBrush _gold;
 
         private SolidBrush _currentBrush;
+
+        private List<string> CurrentIPs = new List<string>();
 
         private string[] FilteredIP = {
             "24.105.29.76", // GLOBAL??
@@ -72,7 +74,7 @@ namespace D2RTools
         [STAThread]
         public int Startup()
         {
-            gameProcess = GetProcess();
+            
             if (gameProcess == default)
                 return 1;
             gameWindowHandle = gameProcess.MainWindowHandle;
@@ -174,19 +176,29 @@ namespace D2RTools
             float yOffset = ConvertStringToInt(CustomY.Text);
 
             string[] args = CurrentIP.Text.Split('.');
-            DrawTextBlock(ref xOffset, ref yOffset, "IP: ", args.Last(), _currentBrush);
+            if (showIP.IsChecked == true)
+            {
+                DrawTextBlock(ref xOffset, ref yOffset, "IP: ", args.Last(), _currentBrush);
+            }
+            else DrawDot(ref xOffset, ref yOffset, "IP: ");
             DrawTextBlock(ref xOffset, ref yOffset, "Time: ", CountdownLabel.Text, _gold);
         }
 
         private float GetStringSize(string str, float size = 20f)
         {
             return (float)_graphics?.MeasureString(_consolasBold, size, str).X;
+        }
 
+        private void DrawDot(ref float dx, ref float dy, string label)
+        {
+            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24f, label);
+            var dx2 = dx + GetStringSize(label) + 5f;
+            _graphics?.DrawCircle(_currentBrush, dx2, dy, ConvertStringToInt(CustomFontSize.Text), 2f);
         }
 
         private void DrawTextBlock(ref float dx, ref float dy, string label, string val, SolidBrush color)
         {
-            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24, label);
+            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24f, label);
             var dx2 = dx + GetStringSize(label) + 5f;
             _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), color, dx2, dy, val); //110f
         }
@@ -270,48 +282,21 @@ namespace D2RTools
 
         private void SetTextColor()
         {
+            CurrentIPs.Clear();
             string[] args = SearchBar.Text.Split(',');
-            if (args.Length > 1)
-            {
-                for (var i = 0; i == args.Length; i++)
-                {
-                    if (i == args.Length)
-                    {
-                        CurrentIP.Foreground = Brushes.Red;
-                        _currentBrush = _red;
-                        return;
-                    }
-                    if (args[i] == CurrentIP.Text)
-                    {
-                        CurrentIP.Foreground = Brushes.Green;
-                        _currentBrush = _green;
-                        return;
-                    }
-                }
 
+            foreach (string arg in args) CurrentIPs.Add(arg);
+
+            if (CurrentIPs.Contains(CurrentIP.Text))
+            {
+                CurrentIP.Foreground = Brushes.Green;
+                return;
             }
             else
             {
-                if (SearchBar.Text != string.Empty && SearchBar.Text != "0.0.0.0" && SearchBar.Text == CurrentIP.Text)
-                {
-                    CurrentIP.Foreground = Brushes.Green;
-                    _currentBrush = _green;
-                    return;
-                }
-                else if (CheckedIPList.Items.Contains(CurrentIP.Text) || SearchBar.Text != string.Empty && SearchBar.Text != "0.0.0.0" && SearchBar.Text != CurrentIP.Text)
-                {
-                    CurrentIP.Foreground = Brushes.Red;
-                    _currentBrush = _red;
-                    return;
-                }
-                else
-                {
-                    CurrentIP.Foreground = Brushes.White;
-                    _currentBrush = _gold;
-                    return;
-                }
+                CurrentIP.Foreground = Brushes.Red;
+                return;
             }
-            
         }
 
         private void FetchIP_Click(object sender, EventArgs e)
@@ -394,13 +379,22 @@ namespace D2RTools
             StartTimer();
         }
 
-        private void checkBox2_Checked(object sender, RoutedEventArgs e)
+        private void autoFetch_Checked(object sender, RoutedEventArgs e)
         {
-            if (checkBox2.IsChecked == true) refreshTimer.Start();
-            else refreshTimer.Stop();
+            if (checkBox2.IsChecked == true)
+            {
+                gameProcess = GetProcess();
+                refreshTimer.Start();
+            }
+            else
+            {
+                gameProcess = null;
+                CurrentIP.Text = "0.0.0.0";
+                refreshTimer.Stop();
+            }
         }
 
-        private void checkBox1_Checked(object sender, RoutedEventArgs e)
+        private void overlay_Checked(object sender, RoutedEventArgs e)
         {
             if (checkBox1.IsChecked == true)
             {
@@ -430,23 +424,10 @@ namespace D2RTools
             return 0f;
         }
 
-        private void ProcessBar_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
-        {
-            Regex r = new Regex("[^0-9]+");
-            e.Handled = r.IsMatch(e.Text);
-        }
-
-        private void ProcessBar_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            string s = ProcessBar.Text;
-            string s2 = s.TrimStart('0');
-            int i = ConvertStringToInt(s2);
-            Process[] p = Process.GetProcessesByName("d2r");
-            int l = p.Length - 1;
-            if (i > p.Length)
-            {
-                ProcessBar.Text = l == -1 ? "0" : l.ToString();
-            }
-        }
+        //private void ProcessBar_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        //{
+        //  Regex r = new Regex("[^0-9]+");
+        //  e.Handled = r.IsMatch(e.Text);
+        //}
     }
 }
