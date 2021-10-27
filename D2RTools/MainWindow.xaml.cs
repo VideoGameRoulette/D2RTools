@@ -200,7 +200,7 @@ namespace D2RTools
         {
             _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24f, label);
             var dx2 = dx + GetStringSize(label) + 5f;
-            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), color, dx2, dy, val);
+            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), color, dx2, dy + 10, val);
         }
 
         public void GetServerDetails()
