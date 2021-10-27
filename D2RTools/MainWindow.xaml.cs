@@ -19,6 +19,7 @@ namespace D2RTools
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DispatcherTimer deltaTime;
         private DispatcherTimer countdownTimer;
         private DispatcherTimer refreshTimer;
         private DispatcherTimer overlayUpdate;
@@ -26,6 +27,12 @@ namespace D2RTools
         public MainWindow()
         {
             InitializeComponent();
+
+            deltaTime = new DispatcherTimer();
+            deltaTime.Interval = TimeSpan.FromSeconds(1);
+            deltaTime.Tick += deltaTime_Tick;
+            deltaTime.Start();
+
             countdownTimer = new DispatcherTimer();
             countdownTimer.Interval = TimeSpan.FromSeconds(1);
             countdownTimer.Tick += countdownTimer_Tick;
@@ -237,8 +244,6 @@ namespace D2RTools
 
                     List<string> IPList = new List<string>();
 
-                    if (gameProcess == default) gameProcess = GetProcess();
-
                     foreach (string line in lines)
                     {
                         if (line.Contains("ESTABLISHED"))
@@ -266,7 +271,6 @@ namespace D2RTools
                             CurrentIP.Text = currentServerData.Last();
                             StartTimer();
                         }
-                        SetTextColor();
                     }
                     else if (IPList.Count == 0)
                     {
@@ -290,11 +294,13 @@ namespace D2RTools
             if (CurrentIPs.Contains(CurrentIP.Text))
             {
                 CurrentIP.Foreground = Brushes.Green;
+                _currentBrush = _green;
                 return;
             }
             else
             {
                 CurrentIP.Foreground = Brushes.Red;
+                _currentBrush = _red;
                 return;
             }
         }
@@ -315,7 +321,6 @@ namespace D2RTools
             {
                 CheckedIPList.Items.Add(CurrentIP.Text);
                 SetCount(CheckedIPList.Items.Count);
-                SetTextColor();
             }
         }
 
@@ -329,7 +334,6 @@ namespace D2RTools
             if (CheckedIPList.SelectedIndex != -1)
             {
                 CheckedIPList.Items.RemoveAt(CheckedIPList.SelectedIndex);
-                SetTextColor();
             }
         }
 
@@ -364,6 +368,11 @@ namespace D2RTools
             ServersCheckedLabel.Text = string.Format("Servers Checked: {0}", i);
         }
 
+        private void deltaTime_Tick(object sender, EventArgs e)
+        {
+            UpdateUI();
+        }
+
         private void refreshTimer_Tick(object sender, EventArgs e)
         {
             GetServerDetails();
@@ -381,16 +390,48 @@ namespace D2RTools
 
         private void autoFetch_Checked(object sender, RoutedEventArgs e)
         {
-            if (checkBox2.IsChecked == true)
+            if(checkBox2.IsChecked == true)
             {
-                if (gameProcess == default) gameProcess = GetProcess();
                 refreshTimer.Start();
             }
             else
             {
-                gameProcess = null;
                 CurrentIP.Text = "0.0.0.0";
                 refreshTimer.Stop();
+            }
+        }
+
+        private void showIP_Checked(object sender, RoutedEventArgs e)
+        {
+            if (showIP.IsChecked == true)
+            {
+                if (overlayUpdate.IsEnabled)
+                {
+                    Shutdown();
+                    overlayUpdate.Stop();
+                    Startup();
+                    overlayUpdate.Start();
+                }
+                else
+                {
+                    Startup();
+                    overlayUpdate.Start();
+                }
+            }
+            else
+            {
+                if (overlayUpdate.IsEnabled)
+                {
+                    Shutdown();
+                    overlayUpdate.Stop();
+                    Startup();
+                    overlayUpdate.Start();
+                }
+                else
+                {
+                    Shutdown();
+                    overlayUpdate.Stop();
+                }
             }
         }
 
@@ -398,13 +439,11 @@ namespace D2RTools
         {
             if (checkBox1.IsChecked == true)
             {
-                if (gameProcess == default) gameProcess = GetProcess();
                 Startup();
                 overlayUpdate.Start();
             }
             else
             {
-                gameProcess = null;
                 Shutdown();
                 overlayUpdate.Stop();
             }
@@ -424,6 +463,13 @@ namespace D2RTools
             var result = float.TryParse(s, out i);
             if (result) return i;
             return 0f;
+        }
+
+        private void UpdateUI()
+        {
+            SetTextColor();
+            if (gameProcess == default) gameProcess = GetProcess();
+            if (gameProcess.HasExited) gameProcess = null;
         }
 
         //private void ProcessBar_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)

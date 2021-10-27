@@ -49,10 +49,10 @@
                         x:Name="showIP"
                         Margin="0,0,10,0"
                         VerticalAlignment="Center"
-                        Checked="autoFetch_Checked"
+                        Checked="showIP_Checked"
                         Content="Show IP"
                         Foreground="White"
-                        Unchecked="autoFetch_Checked" />
+                        Unchecked="showIP_Checked" />
 
                     <CheckBox
                         x:Name="checkBox2"
