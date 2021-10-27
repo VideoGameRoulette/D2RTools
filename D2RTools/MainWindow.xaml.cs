@@ -193,14 +193,14 @@ namespace D2RTools
         {
             _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24f, label);
             var dx2 = dx + GetStringSize(label) + 5f;
-            _graphics?.FillCircle(_currentBrush, dx2, dy, ConvertStringToInt(CustomFontSize.Text) / 2);
+            _graphics?.FillCircle(_currentBrush, dx2, dy + 8, ConvertStringToInt(CustomFontSize.Text) / 2);
         }
 
         private void DrawTextBlock(ref float dx, ref float dy, string label, string val, SolidBrush color)
         {
             _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24f, label);
             var dx2 = dx + GetStringSize(label) + 5f;
-            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), color, dx2, dy + 10, val);
+            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), color, dx2, dy, val);
         }
 
         public void GetServerDetails()
