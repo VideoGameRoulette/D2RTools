@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -248,14 +249,15 @@ namespace D2RTools
                     {
                         if (line.Contains("ESTABLISHED"))
                         {
-                            if (!line.Contains(FilteredIP[0]) &&
-                                !line.Contains(FilteredIP[1]) &&
-                                !line.Contains(FilteredIP[2]) &&
-                                !line.Contains(FilteredIP[3]) &&
-                                !line.Contains(FilteredIP[4]) &&
-                                !line.Contains(FilteredIP[5]) &&
-                                !line.Contains(FilteredIP[6]) &&
-                                !line.Contains(FilteredIP[7]) &&
+                            var _currentIP = Regex.Split(line, ",").Last();
+                            if (!_currentIP.Contains(FilteredIP[0]) &&
+                                !_currentIP.Contains(FilteredIP[1]) &&
+                                !_currentIP.StartsWith(FilteredIP[2]) &&
+                                !_currentIP.StartsWith(FilteredIP[3]) &&
+                                !_currentIP.StartsWith(FilteredIP[4]) &&
+                                !_currentIP.Contains(FilteredIP[5]) &&
+                                !_currentIP.StartsWith(FilteredIP[6]) &&
+                                !_currentIP.StartsWith(FilteredIP[7]) &&
                                 line.Contains(gameProcess.Id.ToString()))
                             {
                                 IPList.Add(line);
@@ -401,38 +403,25 @@ namespace D2RTools
             }
         }
 
-        private void showIP_Checked(object sender, RoutedEventArgs e)
+        private async void showIP_Checked(object sender, RoutedEventArgs e)
         {
-            if (showIP.IsChecked == true)
+            if (overlayUpdate.IsEnabled)
             {
-                if (overlayUpdate.IsEnabled)
-                {
-                    Shutdown();
-                    overlayUpdate.Stop();
-                    Startup();
-                    overlayUpdate.Start();
-                }
-                else
-                {
-                    Startup();
-                    overlayUpdate.Start();
-                }
+                await ShutdownOverlay();
+                await RestartOverlay();
             }
-            else
-            {
-                if (overlayUpdate.IsEnabled)
-                {
-                    Shutdown();
-                    overlayUpdate.Stop();
-                    Startup();
-                    overlayUpdate.Start();
-                }
-                else
-                {
-                    Shutdown();
-                    overlayUpdate.Stop();
-                }
-            }
+        }
+
+        private Task RestartOverlay()
+        {
+            checkBox1.IsChecked = true;
+            return Task.FromResult(true);
+        }
+
+        private Task ShutdownOverlay()
+        {
+            checkBox1.IsChecked = false;
+            return Task.FromResult(true);
         }
 
         private void overlay_Checked(object sender, RoutedEventArgs e)
