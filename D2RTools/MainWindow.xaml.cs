@@ -383,7 +383,7 @@ namespace D2RTools
         {
             if (checkBox2.IsChecked == true)
             {
-                gameProcess = GetProcess();
+                if (gameProcess == default) gameProcess = GetProcess();
                 refreshTimer.Start();
             }
             else
@@ -398,11 +398,13 @@ namespace D2RTools
         {
             if (checkBox1.IsChecked == true)
             {
+                if (gameProcess == default) gameProcess = GetProcess();
                 Startup();
                 overlayUpdate.Start();
             }
             else
             {
+                gameProcess = null;
                 Shutdown();
                 overlayUpdate.Stop();
             }
