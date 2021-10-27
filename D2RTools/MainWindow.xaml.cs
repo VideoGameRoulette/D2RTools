@@ -51,7 +51,7 @@ namespace D2RTools
         private Graphics _graphics;
         private WindowRenderTarget _device;
 
-        private Process GetProcess() => Process.GetProcessesByName("d2r")?.FirstOrDefault();
+        private Process GetProcess() => Process.GetProcessesByName("notepad")?.FirstOrDefault();
         private Process gameProcess;
         private IntPtr gameWindowHandle;
 
@@ -162,6 +162,7 @@ namespace D2RTools
             {
                 _graphics?.BeginScene();
                 _graphics?.ClearScene();
+                if (_device == null) Startup();
                 _device.Transform = new SharpDX.Mathematics.Interop.RawMatrix3x2(ConvertStringToInt(CustomScale.Text), 0f, 0f, ConvertStringToInt(CustomScale.Text), 0f, 0f);
                 DrawOverlay();
             }
