@@ -167,7 +167,7 @@ namespace D2RTools
             catch (Exception ex)
             {
                 checkBox2.IsChecked = false;
-                MessageBox.Show(ex.ToString());
+                Console.WriteLine(ex.ToString());
             }
             finally
             {
