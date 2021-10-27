@@ -43,16 +43,15 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
 
                     <CheckBox
                         x:Name="showIP"
                         Margin="0,0,10,0"
                         VerticalAlignment="Center"
-                        Checked="showIP_Checked"
                         Content="Show IP"
-                        Foreground="White"
-                        Unchecked="showIP_Checked" />
+                        Foreground="White" />
 
                     <CheckBox
                         x:Name="checkBox2"
@@ -67,11 +66,18 @@
                     <CheckBox
                         x:Name="checkBox1"
                         Grid.Column="2"
+                        Margin="0,0,10,0"
                         VerticalAlignment="Center"
                         Checked="overlay_Checked"
                         Content="Enable DirectX Overlay"
                         Foreground="White"
                         Unchecked="overlay_Checked" />
+                    <CheckBox
+                        x:Name="Censor"
+                        Grid.Column="3"
+                        VerticalAlignment="Center"
+                        Content="Censor Game Name"
+                        Foreground="White" />
                 </Grid>
             </StackPanel>
 

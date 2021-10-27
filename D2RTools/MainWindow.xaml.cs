@@ -51,7 +51,7 @@ namespace D2RTools
         private Graphics _graphics;
         private WindowRenderTarget _device;
 
-        private Process GetProcess() => Process.GetProcessesByName("notepad")?.FirstOrDefault();
+        private Process GetProcess() => Process.GetProcessesByName("d2r")?.FirstOrDefault();
         private Process gameProcess;
         private IntPtr gameWindowHandle;
 
@@ -63,6 +63,7 @@ namespace D2RTools
         private SolidBrush _red;
         private SolidBrush _green;
         private SolidBrush _gold;
+        private SolidBrush _black;
 
         private SolidBrush _currentBrush;
 
@@ -118,6 +119,7 @@ namespace D2RTools
             _red = _graphics?.CreateSolidBrush(255, 0, 0);
             _green = _graphics?.CreateSolidBrush(0, 255, 0);
             _gold = _graphics?.CreateSolidBrush(212, 196, 145);
+            _black = _graphics?.CreateSolidBrush(0, 0, 0);
 
             _currentBrush = _gold;
 
@@ -131,6 +133,7 @@ namespace D2RTools
             _red?.Dispose();
             _green?.Dispose();
             _gold?.Dispose();
+            _black?.Dispose();
 
             _currentBrush?.Dispose();
 
@@ -187,10 +190,16 @@ namespace D2RTools
             string[] args = CurrentIP.Text.Split('.');
             if (showIP.IsChecked == true)
             {
-                DrawTextBlock(ref xOffset, ref yOffset, "IP: ", args.Last(), _currentBrush);
+                DrawTextBlock(ref xOffset, ref yOffset, "IP:", args.Last(), _currentBrush);
             }
-            else DrawDot(ref xOffset, ref yOffset, "IP: ");
-            DrawTextBlock(ref xOffset, ref yOffset, "Time: ", CountdownLabel.Text, _gold);
+            else DrawDot(ref xOffset, ref yOffset, "IP:");
+            DrawTextBlock(ref xOffset, ref yOffset, "Time:", CountdownLabel.Text, _gold);
+
+            if (Censor.IsChecked == true)
+            {
+                if (CurrentIP.Text == "0.0.0.0") DrawCencoredInLobby();
+                else DrawCencoredInGame();
+            }
         }
 
         private float GetStringSize(string str, float size = 20f)
@@ -201,15 +210,25 @@ namespace D2RTools
         private void DrawDot(ref float dx, ref float dy, string label)
         {
             _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24f, label);
-            var dx2 = dx + GetStringSize(label) + 5f;
-            _graphics?.FillCircle(_currentBrush, dx2, dy + 8, ConvertStringToInt(CustomFontSize.Text) / 2);
+            var dx2 = dx + GetStringSize(label, _consolasBold.FontSize) + 15f;
+            _graphics?.FillCircle(_currentBrush, dx2, dy + 8, _consolasBold.FontSize / 2);
         }
 
         private void DrawTextBlock(ref float dx, ref float dy, string label, string val, SolidBrush color)
         {
-            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), _gold, dx, dy += 24f, label);
-            var dx2 = dx + GetStringSize(label) + 5f;
-            _graphics?.DrawText(_consolasBold, ConvertStringToFloat(CustomFontSize.Text), color, dx2, dy, val);
+            _graphics?.DrawText(_consolasBold, _consolasBold.FontSize, _gold, dx, dy += 24f, label);
+            var dx2 = dx + GetStringSize(label);
+            _graphics?.DrawText(_consolasBold, _consolasBold.FontSize, color, dx2, dy, val);
+        }
+
+        private void DrawCencoredInGame()
+        {
+            if (_window.Width == 1920) _graphics?.FillRectangle(_black, 1655, 30, 1900, 70); //245x40
+        }
+
+        private void DrawCencoredInLobby()
+        {
+            if (_window.Width == 1920) _graphics?.FillRectangle(_black, 1250, 110, 1690, 275); //245x40
         }
 
         public void GetServerDetails()
@@ -294,7 +313,7 @@ namespace D2RTools
 
             foreach (string arg in args) CurrentIPs.Add(arg);
 
-            if (CurrentIPs.Contains(CurrentIP.Text))
+            if (SearchBar.Text != "0.0.0.0" && SearchBar.Text != string.Empty && CurrentIPs.Contains(CurrentIP.Text))
             {
                 CurrentIP.Foreground = Brushes.Green;
                 _currentBrush = _green;
@@ -402,27 +421,6 @@ namespace D2RTools
                 CurrentIP.Text = "0.0.0.0";
                 refreshTimer.Stop();
             }
-        }
-
-        private async void showIP_Checked(object sender, RoutedEventArgs e)
-        {
-            if (overlayUpdate.IsEnabled)
-            {
-                await ShutdownOverlay();
-                await RestartOverlay();
-            }
-        }
-
-        private Task RestartOverlay()
-        {
-            checkBox1.IsChecked = true;
-            return Task.FromResult(true);
-        }
-
-        private Task ShutdownOverlay()
-        {
-            checkBox1.IsChecked = false;
-            return Task.FromResult(true);
         }
 
         private void overlay_Checked(object sender, RoutedEventArgs e)
