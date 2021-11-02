@@ -70,14 +70,14 @@ namespace D2RTools
         private List<string> CurrentIPs = new List<string>();
 
         private string[] FilteredIP = {
-            "24.105.29.76", // GLOBAL??
-            "34.117.122.6", // GLOBAL??
-            "37.244.28.", // US
-            "37.244.54.", // US
+            "24.105.29.76", // GLOBAL
+            "34.117.122.6", // GLOBAL
+            "37.244.28.", // EU
+            "37.244.54.", // EU
             "117.52.35.", // ASIA
             "127.0.0.1", // LOCAL
-            "137.221.105.", // EU
-            "137.221.106." // EU
+            "137.221.105.", // NA
+            "137.221.106." // NA
         };
 
         [STAThread]
